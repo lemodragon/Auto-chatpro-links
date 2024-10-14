@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Random Link Redirect</title>
+</head>
+<body>
+    <h1>Redirecting to a random link...</h1>
+    <script>
+        fetch('links.txt')
+            .then(response => response.text())
+            .then(text => {
+                // 将文本分割成链接数组
+                const links = text.split('\n').filter(link => link.trim() !== '');
+                
+                // 随机选择一个链接
+                const randomLink = links[Math.floor(Math.random() * links.length)];
+                
+                // 跳转到随机选择的链接
+                window.location.href = randomLink;
+            })
+            .catch(error => {
+                console.error('Error loading links:', error);
+                document.body.innerHTML += '<p>Error loading links. Please try again later.</p>';
+            });
+    </script>
+</body>
+</html>
